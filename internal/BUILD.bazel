@@ -1,0 +1,8 @@
+load("@build_bazel_rules_nodejs//:defs.bzl", "nodejs_binary")
+
+nodejs_binary(
+    name = "svelte",
+    entry_point = "build_bazel_rules_svelte_deps/node_modules/svelte/svelte",
+    visibility = ["//visibility:public"],
+    node_modules = "@build_bazel_rules_svelte_deps//:node_modules",
+)
