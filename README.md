@@ -33,9 +33,7 @@ svelte(
    ],
    entry_point = "Comments.html",
    deps = [
-      ":add-comment",
-      ":comment",
-      ":comment-tree"
+      ":other_svelte_rules"
    ]
 )
 ```
