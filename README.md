@@ -73,6 +73,8 @@ bundle_dev(
 )
 ```
 
+Example Project: https://github.com/thelgevold/svelte-bazel-example
+
 Blog Posts:
 
 http://www.syntaxsuccess.com/viewarticle/svelte-bazel-build
