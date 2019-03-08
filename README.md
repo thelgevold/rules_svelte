@@ -80,3 +80,5 @@ Blog Posts:
 http://www.syntaxsuccess.com/viewarticle/svelte-bazel-build
 
 http://www.syntaxsuccess.com/viewarticle/svelte-bazel-seed
+
+http://www.syntaxsuccess.com/viewarticle/remote-build-execution-with-bazel-and-svelte
