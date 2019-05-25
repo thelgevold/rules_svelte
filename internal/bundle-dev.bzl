@@ -4,16 +4,13 @@ def _bundle_dev(ctx):
   files = get_files(ctx)
       
   args = ctx.actions.args()
-  args.add(["--input", ctx.bin_dir.path + "/" + ctx.file.entry_point.path])
-  args.add(["--output.file", ctx.outputs.build.path])
-  args.add(["--output.format", "iife"])
-  args.add("--no-treeshake")
-  args.add("--no-indent")
+  args.add(ctx.bin_dir.path + "/" + ctx.file.entry_point.path)
+  args.add(ctx.outputs.build.path)
 
   ctx.action(
       executable = ctx.executable._rollup,
       inputs = files,
-      outputs = [ctx.outputs.build],
+      outputs = [ctx.outputs.build, ctx.outputs.map],
       arguments = [args]
   )
  
@@ -25,7 +22,7 @@ bundle_dev = rule(
     "_rollup": attr.label(
         executable = True,
         cfg="host",
-        default = Label("@build_bazel_rules_nodejs//internal/rollup:rollup")),
+        default = Label("//internal:rollup")),
     },
-    outputs = {"build": "%{name}.es6.js", "css": "%{name}.css"}
+    outputs = {"build": "%{name}.es6.js", "map": "%{name}.es6.js.map"}
 )

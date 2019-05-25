@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "svelte": "2.16.1"
+    "svelte": "3.4.2",
+    "rollup": "1.12.3"
   }
 }

@@ -4,9 +4,8 @@ def _bundle_prod(ctx):
   files = get_files(ctx)
       
   args = ctx.actions.args()
-  args.add(["--input", ctx.bin_dir.path + "/" + ctx.file.entry_point.path])
-  args.add(["--output.file", ctx.outputs.build_es6.path])
-  args.add(["--output.format", "iife"])
+  args.add(ctx.bin_dir.path + "/" + ctx.file.entry_point.path)
+  args.add(ctx.outputs.build_es6.path)
   
   ctx.action(
       executable = ctx.executable._rollup,
@@ -43,8 +42,8 @@ bundle_prod = rule(
     "deps": attr.label_list(),
     "entry_point": attr.label(allow_files = True, single_file = True),
     "_typescript": attr.label(executable = True, cfg="host", default = Label("@build_bazel_rules_nodejs//internal/rollup:tsc")),
-    "_rollup": attr.label(executable = True, cfg="host", default = Label("@build_bazel_rules_nodejs//internal/rollup:rollup")),
+    "_rollup": attr.label(executable = True, cfg="host", default = Label("//internal:rollup")),
     "_uglify": attr.label(executable = True, cfg="host", default = Label("@build_bazel_rules_nodejs//internal/rollup:uglify-wrapped")),
     },
-    outputs = {"build_es6": "%{name}.es6.js", "build_es5": "%{name}.es5.js", "build_es5_min": "%{name}.es5.min.js", "css": "%{name}.css"}
+    outputs = {"build_es6": "%{name}.es6.js", "build_es5": "%{name}.es5.js", "build_es5_min": "%{name}.es5.min.js"}
 )

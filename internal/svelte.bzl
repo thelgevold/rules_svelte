@@ -20,8 +20,8 @@ SVELTE_ATTRS = {
 
 def _svelte(ctx):
   args = ctx.actions.args()
-  args.add(["compile", ctx.file.entry_point.path])
-  args.add(["-o", ctx.outputs.build.path])
+  args.add(ctx.file.entry_point.path)
+  args.add(ctx.outputs.build.path)
 
   ctx.actions.run(
       mnemonic = "Svelte",
@@ -42,6 +42,6 @@ svelte = rule(
   implementation = _svelte,
   attrs = SVELTE_ATTRS,
   outputs = {
-      "build": "%{name}.js"
+      "build": "%{name}.svelte.js"
   }
 )
