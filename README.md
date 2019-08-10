@@ -10,7 +10,7 @@ Experimental rules for building Svelte components with Bazel
 http_archive(
    name = "build_bazel_rules_svelte",
    url = "https://github.com/thelgevold/rules_svelte/archive/0.1.zip",
-   strip_prefix = "rules_svelte-0.1",
+   strip_prefix = "rules_svelte-0.5",
    sha256 = "700a19d6d503500bd8dc190d7e29588c16867c2e163d7c8a883879ff602ef527"
 )
 
