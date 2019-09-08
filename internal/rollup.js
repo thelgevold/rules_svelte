@@ -5,14 +5,19 @@ const file = process.argv[3];
 
 class ResolveInternal {
   resolveId(importee) {
-    if (importee === "svelte/internal" || importee === "svelte") {
-      const newPath = path.join(
+    let parts = importee.split("/");
+
+    if (parts[0] != "svelte") {
+        return;
+    }
+
+    let subpackage = parts.length == 2 ? parts[1] : "internal";
+
+    return path.join(
         __dirname,
         "../..",
-        "build_bazel_rules_svelte_deps/node_modules/svelte/internal.mjs"
-      );
-      return newPath;
-    }
+        `build_bazel_rules_svelte_deps/node_modules/svelte/${subpackage}.mjs`
+    );
   }
 }
 
