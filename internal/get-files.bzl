@@ -3,7 +3,7 @@ def get_files(ctx):
   root = ctx.file.entry_point.path.replace(ctx.file.entry_point.basename, "")
 
   for dep in ctx.attr.deps:
-    for file in dep.files:
+    for file in dep.files.to_list():
       if(file.is_source == False):
         if(file.path.endswith(".css")):
           css = ctx.actions.declare_file(ctx.outputs.css.basename)

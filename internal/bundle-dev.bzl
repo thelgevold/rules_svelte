@@ -7,7 +7,7 @@ def _bundle_dev(ctx):
   args.add(ctx.bin_dir.path + "/" + ctx.file.entry_point.path)
   args.add(ctx.outputs.build.path)
 
-  ctx.action(
+  ctx.actions.run(
       executable = ctx.executable._rollup,
       inputs = files,
       outputs = [ctx.outputs.build, ctx.outputs.map],
@@ -18,7 +18,7 @@ bundle_dev = rule(
   implementation = _bundle_dev,
   attrs = {
     "deps": attr.label_list(),
-    "entry_point": attr.label(allow_files = True, single_file = True),
+    "entry_point": attr.label(allow_single_file = True),
     "_rollup": attr.label(
         executable = True,
         cfg="host",

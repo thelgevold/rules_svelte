@@ -8,15 +8,15 @@ class ResolveInternal {
     let parts = importee.split("/");
 
     if (parts[0] != "svelte") {
-        return;
+      return;
     }
 
     let subpackage = parts.length == 2 ? parts[1] : "internal";
 
     return path.join(
-        __dirname,
-        "../..",
-        `build_bazel_rules_svelte_deps/node_modules/svelte/${subpackage}.mjs`
+      __dirname,
+      "../..",
+      `build_bazel_rules_svelte_deps/node_modules/svelte/${subpackage}/index.mjs`
     );
   }
 }
