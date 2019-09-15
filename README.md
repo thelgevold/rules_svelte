@@ -9,10 +9,10 @@ Experimental rules for building Svelte components with Bazel
 ```python
 http_archive(
     name = "build_bazel_rules_svelte",
-    url = "https://github.com/thelgevold/rules_svelte/archive/0.7.zip",
-    strip_prefix = "rules_svelte-0.7",
-    sha256 = "35def8dc56c477256303ea15a22b7cd055e21a98bf5363e5e44ab57294309f60"
-)
+    url = "https://github.com/thelgevold/rules_svelte/archive/0.8.zip",
+    strip_prefix = "rules_svelte-0.8",
+    sha256 = "34784cffec78dbf533431c3bd0f399d099bbe9ef50577939fd61ac7626ff241f"
+) 
 
 load("@build_bazel_rules_svelte//:defs.bzl", "rules_svelte_dependencies")
 rules_svelte_dependencies()
