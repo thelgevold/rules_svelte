@@ -7,7 +7,7 @@ def _bundle_prod(ctx):
   args.add(ctx.bin_dir.path + "/" + ctx.file.entry_point.path)
   args.add(ctx.outputs.build_es6.path)
   
-  ctx.action(
+  ctx.actions.run(
       executable = ctx.executable._rollup,
       inputs = files,
       outputs = [ctx.outputs.build_es6],
@@ -19,7 +19,7 @@ def _bundle_prod(ctx):
   argsTS += [ctx.outputs.build_es6.path]
   argsTS += ["--outFile", ctx.outputs.build_es5.path]
 
-  ctx.action(
+  ctx.actions.run(
       executable = ctx.executable._typescript,
       inputs = [ctx.outputs.build_es6],
       outputs = [ctx.outputs.build_es5],
@@ -29,7 +29,7 @@ def _bundle_prod(ctx):
   argsUglify = [ctx.outputs.build_es5.path]
   argsUglify += ["--output", ctx.outputs.build_es5_min.path]
 
-  ctx.action(
+  ctx.actions.run(
       executable = ctx.executable._uglify,
       inputs = [ctx.outputs.build_es5],
       outputs = [ctx.outputs.build_es5_min],
