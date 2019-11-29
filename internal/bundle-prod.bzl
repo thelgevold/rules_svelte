@@ -43,7 +43,7 @@ bundle_prod = rule(
     "entry_point": attr.label(allow_single_file = True),
     "_typescript": attr.label(executable = True, cfg="host", default = Label("@build_bazel_rules_nodejs//internal/rollup:tsc")),
     "_rollup": attr.label(executable = True, cfg="host", default = Label("//internal:rollup")),
-    "_uglify": attr.label(executable = True, cfg="host", default = Label("@build_bazel_rules_nodejs//internal/rollup:uglify-wrapped")),
+    "_uglify": attr.label(executable = True, cfg="host", default = Label("//internal:uglify")),
     },
     outputs = {"build_es6": "%{name}.es6.js", "build_es5": "%{name}.es5.js", "build_es5_min": "%{name}.es5.min.js"}
 )

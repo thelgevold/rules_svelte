@@ -13,6 +13,16 @@ nodejs_binary(
 )
 
 nodejs_binary(
+    name = "uglify",
+    entry_point = "build_bazel_rules_svelte_deps/node_modules/uglify-js/bin/uglifyjs",
+    data = [
+       "@build_bazel_rules_svelte_deps//uglify-js"
+     
+    ],
+    visibility = ["//visibility:public"]
+)
+
+nodejs_binary(
     name = "svelte",
     entry_point = "build_bazel_rules_svelte/internal/svelte.js",
     data = [
