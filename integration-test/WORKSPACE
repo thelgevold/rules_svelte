@@ -23,6 +23,11 @@ local_repository(
 load("@build_bazel_rules_nodejs//:defs.bzl", "node_repositories", "yarn_install")
 node_repositories()
 
+yarn_install(
+    name = "test_deps",
+    package_json = "@tests//:package.json",
+    yarn_lock = "@tests//:yarn.lock",
+  )
 
 load("@build_bazel_rules_svelte//:defs.bzl", "rules_svelte_dependencies")
 rules_svelte_dependencies()
@@ -30,4 +35,5 @@ rules_svelte_dependencies()
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
+
 

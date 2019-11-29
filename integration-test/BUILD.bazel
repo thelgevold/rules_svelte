@@ -1,28 +1,49 @@
 package(default_visibility = ["//visibility:public"])
-load("@build_bazel_rules_svelte//:defs.bzl", "svelte")
+load("@build_bazel_rules_nodejs//:defs.bzl", "nodejs_binary")
 load("@build_bazel_rules_svelte//:defs.bzl", "svelte", "bundle_dev", "bundle_prod")
 
 svelte(
-  name = "App",
+  name = "ProdApp",
   entry_point = "App.svelte",
-  srcs = ["main.js"],
+  srcs = ["main-prod.js"],
   deps = [
     "//grid:Grid"
   ]
 )
 
+svelte(
+  name = "DevApp",
+  entry_point = "App.svelte",
+  srcs = ["main-dev.js"],
+  deps = [
+    "//grid:Grid"
+  ]
+)
+
+nodejs_binary(
+    name = "server",
+    entry_point = "test_deps/node_modules/lite-server/bin/lite-server",
+    data = [
+       "@test_deps//lite-server",
+       ":bundle_prod",
+       ":bundle_dev",
+       ":index.html"
+    ],
+    visibility = ["//visibility:public"]
+)
+
 bundle_dev(
   name = "bundle_dev",
-  entry_point = "main.js",
+  entry_point = "main-dev.js",
   deps = [
-    ":App"
+    ":DevApp"
   ],
 )
 
 bundle_prod(
   name = "bundle_prod",
-  entry_point = "main.js",
+  entry_point = "main-prod.js",
   deps = [
-    ":App"
+    ":ProdApp"
   ],
 )
