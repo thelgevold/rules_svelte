@@ -41,7 +41,7 @@ bundle_prod = rule(
   attrs = {
     "deps": attr.label_list(),
     "entry_point": attr.label(allow_single_file = True),
-    "_typescript": attr.label(executable = True, cfg="host", default = Label("@build_bazel_rules_nodejs//internal/rollup:tsc")),
+    "_typescript": attr.label(executable = True, cfg="host", default = Label("//internal:typescript")),
     "_rollup": attr.label(executable = True, cfg="host", default = Label("//internal:rollup")),
     "_uglify": attr.label(executable = True, cfg="host", default = Label("//internal:uglify")),
     },

@@ -1,8 +1,18 @@
-load("@build_bazel_rules_nodejs//:defs.bzl", "nodejs_binary")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+
+nodejs_binary(
+    name = "typescript",
+    entry_point = "@build_bazel_rules_svelte_deps//:node_modules/typescript/lib/tsc.js",
+    data = [
+       "@build_bazel_rules_svelte_deps//typescript"
+     
+    ],
+    visibility = ["//visibility:public"]
+)
 
 nodejs_binary(
     name = "rollup",
-    entry_point = "build_bazel_rules_svelte/internal/rollup.js",
+    entry_point = ":rollup.js",
     data = [
        ":rollup.js",
        "@build_bazel_rules_svelte_deps//rollup",
@@ -14,7 +24,7 @@ nodejs_binary(
 
 nodejs_binary(
     name = "uglify",
-    entry_point = "build_bazel_rules_svelte_deps/node_modules/uglify-js/bin/uglifyjs",
+    entry_point = "@build_bazel_rules_svelte_deps//:node_modules/uglify-js/bin/uglifyjs",
     data = [
        "@build_bazel_rules_svelte_deps//uglify-js"
      
@@ -24,7 +34,7 @@ nodejs_binary(
 
 nodejs_binary(
     name = "svelte",
-    entry_point = "build_bazel_rules_svelte/internal/svelte.js",
+    entry_point = ":svelte.js",
     data = [
       ":svelte.js",
       "@build_bazel_rules_svelte_deps//svelte"

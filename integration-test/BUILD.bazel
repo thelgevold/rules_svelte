@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("@build_bazel_rules_nodejs//:defs.bzl", "nodejs_binary")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 load("@build_bazel_rules_svelte//:defs.bzl", "svelte", "bundle_dev", "bundle_prod")
 
 svelte(
@@ -22,7 +22,7 @@ svelte(
 
 nodejs_binary(
     name = "server",
-    entry_point = "test_deps/node_modules/lite-server/bin/lite-server",
+    entry_point = "@test_deps//:node_modules/lite-server/bin/lite-server",
     data = [
        "@test_deps//lite-server",
        ":bundle_prod",
