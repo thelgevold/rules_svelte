@@ -1,4 +1,4 @@
-workspace(name = "tests")
+workspace(name = "tests", managed_directories = {"@test_deps": ["node_modules"]},)
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")

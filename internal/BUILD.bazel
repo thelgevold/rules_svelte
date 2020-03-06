@@ -17,6 +17,8 @@ nodejs_binary(
        ":rollup.js",
        "@build_bazel_rules_svelte_deps//rollup",
        "@build_bazel_rules_svelte_deps//svelte",
+       "@build_bazel_rules_svelte_deps//@rollup/plugin-node-resolve",
+       "@build_bazel_rules_svelte_deps//@rollup/plugin-commonjs"
      
     ],
     visibility = ["//visibility:public"]
