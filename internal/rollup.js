@@ -29,7 +29,7 @@ class ResolveInternal {
       ) + binFolder;
 
       let node_parts = importee.split("/node_modules")
-      return base + 'node_modules/' + node_parts[1];
+      return base + 'node_modules' + node_parts[1];
     }
   }
 }
