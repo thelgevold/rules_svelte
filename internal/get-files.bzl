@@ -17,17 +17,8 @@ def get_files(ctx):
     else: 
       for file in dep.files.to_list():
         if(file.is_source == False):
-          if(file.path.endswith(".css")):
-            css = ctx.actions.declare_file(ctx.outputs.css.basename)
-            ctx.actions.expand_template(
-              output = ctx.outputs.css,
-              template =  file,
-              substitutions = {}
-            )
-            files.append(css)
-          else:
-            files.append(file)
-        if(file.is_source):
+          files.append(file)
+        else:
           f = ctx.actions.declare_file(file.path.replace(root, ""))
           ctx.actions.expand_template(
             output = f,
