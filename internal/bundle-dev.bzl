@@ -2,11 +2,13 @@ load("//internal:get-files.bzl", "get_files")
 
 def _bundle_dev(ctx):
   files = get_files(ctx)
-
+  
+  path = ctx.bin_dir.path + "/" + ctx.file.entry_point.path.replace(ctx.file.entry_point.basename, "")
+  
   args = ctx.actions.args()
   args.add(ctx.bin_dir.path + "/" + ctx.file.entry_point.path)
   args.add(ctx.outputs.build.path)
-  args.add(ctx.bin_dir.path.replace(ctx.file.entry_point.basename, "") + "/")
+  args.add(path)
 
   ctx.actions.run(
       executable = ctx.executable._rollup,
