@@ -6,7 +6,7 @@ def _bundle_prod(ctx):
   args = ctx.actions.args()
   args.add(ctx.bin_dir.path + "/" + ctx.file.entry_point.path)
   args.add(ctx.outputs.build_es6.path)
-  args.add(ctx.bin_dir.path + "/")
+  args.add(ctx.bin_dir.path.replace(ctx.file.entry_point.basename, "") + "/")
   
   ctx.actions.run(
       executable = ctx.executable._rollup,
