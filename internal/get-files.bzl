@@ -16,14 +16,12 @@ def get_files(ctx):
         files.append(f)
     else: 
       for file in dep.files.to_list():
-        if(file.is_source == False):
-          files.append(file)
-        else:
-          f = ctx.actions.declare_file(file.path.replace(root, ""))
-          ctx.actions.expand_template(
-            output = f,
-            template =  file,
-            substitutions = {}
-          )
-          files.append(f)
+        f = ctx.actions.declare_file(file.path.replace(root, ""))
+        ctx.actions.expand_template(
+          output = f,
+          template =  file,
+          substitutions = {}
+        )
+        files.append(f)
+  
   return files
