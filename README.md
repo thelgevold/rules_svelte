@@ -48,7 +48,8 @@ name = "comments_bundle",
    entry_point = "main.js",
    deps = [
       ":comments",
-      ":styles"
+      ":styles",
+      "@npm//my-npm-dep"
    ],
 )
 
@@ -57,7 +58,8 @@ bundle_dev(
    entry_point = "main.js",
    deps = [
       ":comments",
-      ":styles"
+      ":styles",
+      "@npm//my-npm-dep"
    ],
 )
 ```
