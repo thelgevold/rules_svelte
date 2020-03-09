@@ -1,0 +1,39 @@
+package(default_visibility = ["//visibility:public"])
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@build_bazel_rules_svelte//:defs.bzl", "svelte", "bundle_dev", "bundle_prod")
+
+svelte(
+  name = "ProdApp",
+  entry_point = "App.svelte",
+  srcs = ["main-prod.js"],
+  deps = [
+    "//app/client/grid:Grid"
+  ]
+)
+
+svelte(
+  name = "DevApp",
+  entry_point = "App.svelte",
+  srcs = ["main-dev.js"],
+  deps = [
+    "//app/client/grid:Grid"
+  ]
+)
+
+bundle_dev(
+  name = "bundle_dev",
+  entry_point = "main-dev.js",
+  deps = [
+    ":DevApp",
+    "@npm//lodash"
+  ]
+)
+
+bundle_prod(
+  name = "bundle_prod",
+  entry_point = "main-prod.js",
+  deps = [
+    ":ProdApp",
+    "@npm//lodash"
+  ]
+)

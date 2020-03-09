@@ -11,16 +11,23 @@ nodejs_binary(
 )
 
 nodejs_binary(
-    name = "rollup",
-    entry_point = ":rollup.js",
+    name = "create_config",
+    entry_point = "create-config.js",
     data = [
-       ":rollup.js",
+       "create-config.js",
+    ],
+    visibility = ["//visibility:public"]
+)
+
+nodejs_binary(
+    name = "rollup_bin",
+    entry_point = "@build_bazel_rules_svelte_deps//:node_modules/rollup/dist/bin/rollup",
+    data = [
        "@build_bazel_rules_svelte_deps//rollup",
        "@build_bazel_rules_svelte_deps//svelte",
        "@build_bazel_rules_svelte_deps//uglify-js",
        "@build_bazel_rules_svelte_deps//@rollup/plugin-node-resolve",
        "@build_bazel_rules_svelte_deps//@rollup/plugin-commonjs"
-     
     ],
     visibility = ["//visibility:public"]
 )

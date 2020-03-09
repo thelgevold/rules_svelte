@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "svelte": "3.19.1",
-    "rollup": "1.27.5",
+    "rollup": "2.0.2",
     "@rollup/plugin-node-resolve": "7.1.1",
     "@rollup/plugin-commonjs": "11.0.2",
     "uglify-js": "3.7.0",
