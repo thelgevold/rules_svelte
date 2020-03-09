@@ -3,8 +3,6 @@ const fs = require('fs');
 const output = process.argv[2];
 const hostPath = process.argv[3];
 
-console.log(process.argv);
-
 const config = `const resolve = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
 const path = require("path");
