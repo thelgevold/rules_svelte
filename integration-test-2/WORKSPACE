@@ -1,0 +1,39 @@
+workspace(name = "tests_2", managed_directories = {"@npm": ["node_modules"]},)
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "bazel_skylib",
+    remote = "https://github.com/bazelbuild/bazel-skylib.git",
+    tag = "0.7.0"
+)
+
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "2eca5b934dee47b5ff304f502ae187c40ec4e33e12bcbce872a2eeb786e23269",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/1.4.1/rules_nodejs-1.4.1.tar.gz"],
+)
+
+local_repository(
+    name = "build_bazel_rules_svelte",
+    path = "../"
+) 
+
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
+node_repositories()
+
+yarn_install(
+    name = "npm",
+    package_json = "//:package.json",
+    yarn_lock = "//:yarn.lock",
+  )
+
+load("@build_bazel_rules_svelte//:defs.bzl", "rules_svelte_dependencies")
+rules_svelte_dependencies()
+
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
+bazel_skylib_workspace()
+
+

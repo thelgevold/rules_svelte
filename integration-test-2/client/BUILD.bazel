@@ -1,0 +1,30 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@build_bazel_rules_svelte//:defs.bzl", "svelte", "bundle_prod")
+
+svelte(
+  name = "App",
+  entry_point = "App.svelte",
+  srcs = ["main.js"],
+)
+
+bundle_prod(
+  name = "bundle_prod",
+  entry_point = "main.js",
+  deps = [
+    ":App",
+    "@npm//lodash"
+  ],
+)
+
+nodejs_binary(
+  name = "server",
+  entry_point = "@npm//:node_modules/lite-server/bin/lite-server",
+  templated_args = ["--baseDir=client"],
+  data = [
+      "index.html",
+      ":bundle_prod",
+      "@npm//lite-server",
+  ],
+)

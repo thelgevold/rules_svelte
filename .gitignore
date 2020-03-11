@@ -1,3 +1,5 @@
 node_modules
-integration-test/bazel-*
-integration-test/dist
+integration-test-1/bazel-*
+integration-test-1/dist
+integration-test-2/bazel-*
+integration-test-2/dist
