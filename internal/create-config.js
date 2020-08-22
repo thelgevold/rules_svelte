@@ -4,7 +4,7 @@ const output = process.argv[2];
 const hostPath = process.argv[3];
 const bin = process.argv[4];
 
-const config = `const resolve = require('@rollup/plugin-node-resolve');
+const config = `import { nodeResolve } from '@rollup/plugin-node-resolve';
 const commonjs = require('@rollup/plugin-commonjs');
 const path = require("path");
 
@@ -13,7 +13,6 @@ class ResolveInternal {
     let parts = importee.split("/");
 
     if (parts[0] === "svelte") {
-
       let subpackage = parts.length == 2 ? parts[1] : "internal";
       
       let hostPath = \`${hostPath}\`;
@@ -35,7 +34,7 @@ module.exports = {
     sourcemap: true,
     name: 'svelte_app'
   },
-  plugins: [new ResolveInternal(), resolve(), commonjs()]
+  plugins: [new ResolveInternal(), nodeResolve(), commonjs()]
 };`;
 
 fs.writeFileSync(output, config.replace('__HOST_PATH__', hostPath), 'utf8');

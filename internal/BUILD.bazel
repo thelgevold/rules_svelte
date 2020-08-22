@@ -28,6 +28,9 @@ nodejs_binary(
         "@build_bazel_rules_svelte_deps//uglify-js",
     ],
     entry_point = "@build_bazel_rules_svelte_deps//:node_modules/rollup/dist/bin/rollup",
+    # Disable rules_nodejs patch that breaks relative imports of compiled .svelte.js files
+    # See: https://github.com/bazelbuild/rules_nodejs/commit/7d070ffadf9c3b41711382a4737b995f987c14fa
+    templated_args = ["--nobazel_node_patches"],
     visibility = ["//visibility:public"],
 )
 
