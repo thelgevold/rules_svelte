@@ -1,3 +1,5 @@
+"Implementation of bundle_prod rule."
+
 load("//internal:get-files.bzl", "get_files")
 load("//internal:get-config.bzl", "get_config")
 
@@ -19,26 +21,26 @@ def _bundle_prod(ctx):
         arguments = [args],
     )
 
-    argsTS = ["--target", "es5"]
-    argsTS += ["--allowJS"]
-    argsTS += [ctx.outputs.build_es6.path]
-    argsTS += ["--outFile", ctx.outputs.build_es5.path]
+    args_ts = ["--target", "es5"]
+    args_ts.append("--allowJS")
+    args_ts.append(ctx.outputs.build_es6.path)
+    args_ts += ["--outFile", ctx.outputs.build_es5.path]
 
     ctx.actions.run(
         executable = ctx.executable._typescript,
         inputs = [ctx.outputs.build_es6],
         outputs = [ctx.outputs.build_es5],
-        arguments = argsTS,
+        arguments = args_ts,
     )
 
-    argsUglify = [ctx.outputs.build_es5.path]
-    argsUglify += ["--output", ctx.outputs.build_es5_min.path]
+    args_uglify = [ctx.outputs.build_es5.path]
+    args_uglify += ["--output", ctx.outputs.build_es5_min.path]
 
     ctx.actions.run(
         executable = ctx.executable._uglify,
         inputs = [ctx.outputs.build_es5],
         outputs = [ctx.outputs.build_es5_min],
-        arguments = argsUglify,
+        arguments = args_uglify,
     )
 
 bundle_prod = rule(

@@ -1,3 +1,5 @@
+"Implementation of bundle_dev rule."
+
 load("//internal:get-files.bzl", "get_files")
 load("//internal:get-config.bzl", "get_config")
 

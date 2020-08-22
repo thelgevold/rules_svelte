@@ -1,3 +1,5 @@
+"Top-level rule exports"
+
 load("//internal:bundle-dev.bzl", _bundle_dev = "bundle_dev")
 load("//internal:bundle-prod.bzl", _bundle_prod = "bundle_prod")
 load("//internal:svelte.bzl", _svelte = "svelte")

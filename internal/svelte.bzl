@@ -1,9 +1,11 @@
-SvelteFiles = provider("transitive_sources")
+"Implementation of the svelte rule"
+
+SvelteFilesInfo = provider("transitive_sources")
 
 def get_transitive_srcs(srcs, deps):
     return depset(
         srcs,
-        transitive = [dep[SvelteFiles].transitive_sources for dep in deps],
+        transitive = [dep[SvelteFilesInfo].transitive_sources for dep in deps],
     )
 
 def _svelte(ctx):
@@ -22,7 +24,7 @@ def _svelte(ctx):
     trans_srcs = get_transitive_srcs(ctx.files.srcs + [ctx.outputs.build], ctx.attr.deps)
 
     return [
-        SvelteFiles(transitive_sources = trans_srcs),
+        SvelteFilesInfo(transitive_sources = trans_srcs),
         DefaultInfo(files = trans_srcs),
     ]
 

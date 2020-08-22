@@ -6,8 +6,8 @@ def get_files(ctx):
     for dep in ctx.attr.deps:
         if NpmPackageInfo in dep:
             for npm in dep[NpmPackageInfo].sources.to_list():
-                npmParts = npm.path.split("node_modules")
-                f = ctx.actions.declare_file("node_modules/" + npmParts[1])
+                npm_parts = npm.path.split("node_modules")
+                f = ctx.actions.declare_file("node_modules/" + npm_parts[1])
                 ctx.actions.expand_template(
                     output = f,
                     template = npm,
