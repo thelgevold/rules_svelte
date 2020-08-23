@@ -1,7 +1,7 @@
 {
   "devDependencies": {
+    "@bazel/hide-bazel-files": "^1.7.0",
     "lite-server": "2.5.4",
-    "@bazel/hide-bazel-files": "latest",
-    "lodash": "4.17.19"
+    "lodash": "4.17.20"
   }
 }
