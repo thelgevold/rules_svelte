@@ -1,4 +1,7 @@
-workspace(name = "tests", managed_directories = {"@test_deps": ["node_modules"]},)
+workspace(
+    name = "tests",
+    managed_directories = {"@test_deps": ["node_modules"]},
+)
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
@@ -6,7 +9,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 git_repository(
     name = "bazel_skylib",
     remote = "https://github.com/bazelbuild/bazel-skylib.git",
-    tag = "0.7.0"
+    tag = "0.7.0",
 )
 
 http_archive(
@@ -17,23 +20,23 @@ http_archive(
 
 local_repository(
     name = "build_bazel_rules_svelte",
-    path = "../"
-) 
+    path = "../",
+)
 
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
+
 node_repositories()
 
 yarn_install(
     name = "test_deps",
     package_json = "@tests//:package.json",
     yarn_lock = "@tests//:yarn.lock",
-  )
+)
 
 load("@build_bazel_rules_svelte//:defs.bzl", "rules_svelte_dependencies")
+
 rules_svelte_dependencies()
 
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
-
-

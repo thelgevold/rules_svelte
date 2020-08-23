@@ -1,39 +1,39 @@
+load("@build_bazel_rules_svelte//:defs.bzl", "bundle_dev", "bundle_prod", "svelte")
+
 package(default_visibility = ["//visibility:public"])
-load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
-load("@build_bazel_rules_svelte//:defs.bzl", "svelte", "bundle_dev", "bundle_prod")
 
 svelte(
-  name = "ProdApp",
-  entry_point = "App.svelte",
-  srcs = ["main-prod.js"],
-  deps = [
-    "//app/client/grid:Grid"
-  ]
+    name = "ProdApp",
+    srcs = ["main-prod.js"],
+    entry_point = "App.svelte",
+    deps = [
+        "//app/client/grid:Grid",
+    ],
 )
 
 svelte(
-  name = "DevApp",
-  entry_point = "App.svelte",
-  srcs = ["main-dev.js"],
-  deps = [
-    "//app/client/grid:Grid"
-  ]
+    name = "DevApp",
+    srcs = ["main-dev.js"],
+    entry_point = "App.svelte",
+    deps = [
+        "//app/client/grid:Grid",
+    ],
 )
 
 bundle_dev(
-  name = "bundle_dev",
-  entry_point = "main-dev.js",
-  deps = [
-    ":DevApp",
-    "@test_deps//lodash"
-  ]
+    name = "bundle_dev",
+    entry_point = "main-dev.js",
+    deps = [
+        ":DevApp",
+        "@test_deps//lodash",
+    ],
 )
 
 bundle_prod(
-  name = "bundle_prod",
-  entry_point = "main-prod.js",
-  deps = [
-    ":ProdApp",
-    "@test_deps//lodash"
-  ]
+    name = "bundle_prod",
+    entry_point = "main-prod.js",
+    deps = [
+        ":ProdApp",
+        "@test_deps//lodash",
+    ],
 )
