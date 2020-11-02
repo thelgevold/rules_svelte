@@ -1,0 +1,10 @@
+{
+  "node_modules": [
+    "rxjs/package.json",
+    "rxjs/_esm2015/index.js",
+    "rxjs/_esm2015/internal/**.js",
+    "rxjs/operators/package.json",
+    "rxjs/_esm2015/operators/index.js"
+  ],
+  "entry_point": "main-closure.js"
+}

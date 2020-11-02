@@ -1,12 +1,17 @@
 <script>
-	import Grid from './grid/Grid.svelte';
+	import Grid from "./grid/Grid.svelte";
+	import { interval } from "rxjs";
+	import { map, tap, take } from "rxjs/operators";
 
-	import uniq from 'lodash/uniq';
-	
-	const numbers = [1, 5, 5, 5, 1, 1, 15, 15, 15];
+	let current = 0;
 
-  const uniqNumbers = uniq(numbers);
-
+	interval(1000)
+		.pipe(
+			map((v) => v * 100),
+			tap((v) => (current = v)),
+			take(100)
+		)
+		.subscribe();
 </script>
 
 <style>
@@ -18,9 +23,5 @@
 <h1>Grid</h1>
 <Grid />
 
-<h4>Unique Numbers from lodash</h4>
-<ul>
-	{#each uniqNumbers as num}
-		<li>{ num }</li>
-	{/each}
-</ul>
+<h4>RxJs Interval</h4>
+{current}

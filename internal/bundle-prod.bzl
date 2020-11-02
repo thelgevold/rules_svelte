@@ -1,61 +1,74 @@
 "Implementation of bundle_prod rule."
 
-load("//internal:get-files.bzl", "get_files")
+load("//internal:get-files.bzl", "copy_files")
 load("//internal:get-config.bzl", "get_config")
 
 def _bundle_prod(ctx):
-    files = get_files(ctx)
+    if not ctx.file.closure_config == None:
+        rootFolder = ctx.file.entry_point.path.replace(ctx.file.entry_point.basename, "")
 
-    config = get_config(ctx)
-    files.append(config)
+        argsClosure = [ctx.outputs.bundle.path]
+        argsClosure.append(ctx.bin_dir.path + "/" + rootFolder)
+        argsClosure.append(ctx.attr._java[java_common.JavaRuntimeInfo].java_executable_exec_path)
+        argsClosure.append(rootFolder)
+        
+        closure_files = copy_files(ctx)
+    
+        ctx.actions.run(
+            executable = ctx.executable._closure,
+            inputs = closure_files,
+            outputs = [ctx.outputs.bundle],
+            arguments = argsClosure,
+        )
+    else:    
+        files = copy_files(ctx)
 
-    args = ctx.actions.args()
-    args.add_all(["--config", config.path])
-    args.add_all(["--input", ctx.bin_dir.path + "/" + ctx.file.entry_point.path])
-    args.add_all(["--file", ctx.outputs.build_es6.path])
+        config = get_config(ctx)
+        files.append(config)
 
-    ctx.actions.run(
-        executable = ctx.executable._rollup,
-        inputs = files,
-        outputs = [ctx.outputs.build_es6],
-        arguments = [args],
-    )
+        bundle = ctx.actions.declare_file("temp.js")
 
-    args_ts = ["--target", "es5"]
-    args_ts.append("--allowJS")
-    args_ts.append(ctx.outputs.build_es6.path)
-    args_ts += ["--outFile", ctx.outputs.build_es5.path]
+        args = ctx.actions.args()
+        args.add_all(["--config", config.path])
+        args.add_all(["--input", ctx.bin_dir.path + "/build-output/src/" + ctx.file.entry_point.path])
+        args.add_all(["--file", bundle])
 
-    ctx.actions.run(
-        executable = ctx.executable._typescript,
-        inputs = [ctx.outputs.build_es6],
-        outputs = [ctx.outputs.build_es5],
-        arguments = args_ts,
-    )
+        ctx.actions.run(
+            executable = ctx.executable._rollup,
+            inputs = files,
+            outputs = [bundle],
+            arguments = [args],
+        )
 
-    args_uglify = [ctx.outputs.build_es5.path]
-    args_uglify += ["--output", ctx.outputs.build_es5_min.path]
+        args_terser = [bundle.path]
+        args_terser += ["--output", ctx.outputs.bundle.path]
 
-    ctx.actions.run(
-        executable = ctx.executable._uglify,
-        inputs = [ctx.outputs.build_es5],
-        outputs = [ctx.outputs.build_es5_min],
-        arguments = args_uglify,
-    )
+        ctx.actions.run(
+            executable = ctx.executable._terser,
+            inputs = [bundle],
+            outputs = [ctx.outputs.bundle],
+            arguments = args_terser,
+        )
+
 
 bundle_prod = rule(
     implementation = _bundle_prod,
     attrs = {
         "deps": attr.label_list(),
         "entry_point": attr.label(allow_single_file = True),
-        "_typescript": attr.label(executable = True, cfg = "host", default = Label("//internal:typescript")),
+        "closure_config": attr.label(allow_single_file = True),
+        "_java": attr.label(executable = False, allow_files = True, default = Label("@bazel_tools//tools/jdk:current_java_runtime")), 
+        "_svelte_deps": attr.label(executable = False, allow_files = True, default = Label("//internal:svelte_deps")),
         "_rollup": attr.label(executable = True, cfg = "host", default = Label("//internal:rollup_bin")),
-        "_uglify": attr.label(executable = True, cfg = "host", default = Label("//internal:uglify")),
+        "_closure": attr.label(executable = True, cfg = "host", default = Label("//internal:closure_bin")),
+        "_terser": attr.label(executable = True, cfg = "host", default = Label("//internal:terser")),
         "_config": attr.label(
             executable = True,
             cfg = "host",
             default = Label("//internal:create_config"),
-        ),
+        )
+      
     },
-    outputs = {"build_es6": "%{name}.es6.js", "build_es5": "%{name}.es5.js", "build_es5_min": "%{name}.es5.min.js"},
+    
+    outputs = {"bundle": "%{name}.min.js"},
 )

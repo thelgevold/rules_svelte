@@ -5,16 +5,17 @@ package(default_visibility = ["//visibility:public"])
 
 svelte(
     name = "App",
-    srcs = ["main.js"],
+    srcs = ["main-closure.js"],
     entry_point = "App.svelte",
 )
 
 bundle_prod(
-    name = "bundle_prod",
-    entry_point = "main.js",
+    name = "bundle_prod_closure",
+    entry_point = "main-closure.js",
+    closure_config = ":closure-config.json",
     deps = [
         ":App",
-        "@npm//lodash",
+        "@npm//rxjs",
     ],
 )
 
@@ -22,8 +23,9 @@ nodejs_binary(
     name = "server",
     data = [
         "index.html",
-        ":bundle_prod",
+        ":bundle_prod_closure",
         "@npm//lite-server",
+        "@npm//rxjs",
     ],
     entry_point = "@npm//:node_modules/lite-server/bin/lite-server",
     templated_args = ["--baseDir=client"],

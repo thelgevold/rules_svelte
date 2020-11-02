@@ -3,8 +3,10 @@
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-node-resolve": "9.0.0",
     "rollup": "2.26.5",
-    "svelte": "3.24.1",
-    "typescript": "4.0.2",
-    "uglify-js": "3.10.1"
+    "svelte": "3.29.4",
+    "terser": "5.3.8",
+    "google-closure-compiler": "20201006.0.0",
+    "fs-extra": "9.0.1",
+    "find-up": "5.0.0"
   }
 }

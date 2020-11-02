@@ -15,7 +15,6 @@ class ResolveInternal {
     if (parts[0] === "svelte") {
       let subpackage = parts.length == 2 ? parts[1] : "internal";
       
-      let hostPath = \`${hostPath}\`;
       let bin = \`${bin}\`;
     
       var p = __dirname.split(bin)[0] + '/bazel-out/' + '__HOST_PATH__';

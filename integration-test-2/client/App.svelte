@@ -1,14 +1,17 @@
 <script>
-	import uniq from 'lodash/uniq';
-	
-	const numbers = [1, 5, 5, 5, 1, 1, 15, 15, 15];
+	import { interval } from "rxjs";
+	import { map, tap, take } from "rxjs/operators";
 
-  const uniqNumbers = uniq(numbers);
+	let current = 0;
+
+	interval(1000)
+		.pipe(
+			map((v) => v * 100),
+			tap((v) => (current = v)),
+			take(100)
+		)
+		.subscribe();
 </script>
 
-<h4>Unique Numbers from lodash</h4>
-<ul class="unique-numbers">
-	{#each uniqNumbers as num}
-		<li>{ num }</li>
-	{/each}
-</ul>
+<h4>RxJs Interval</h4>
+{current}

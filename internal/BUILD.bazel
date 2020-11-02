@@ -1,13 +1,5 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
-
-nodejs_binary(
-    name = "typescript",
-    data = [
-        "@build_bazel_rules_svelte_deps//typescript",
-    ],
-    entry_point = "@build_bazel_rules_svelte_deps//:node_modules/typescript/lib/tsc.js",
-    visibility = ["//visibility:public"],
-)
+load("@build_bazel_rules_nodejs//:index.bzl", "pkg_web")
 
 nodejs_binary(
     name = "create_config",
@@ -18,6 +10,12 @@ nodejs_binary(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "svelte_deps", 
+    srcs = glob(["node_modules/svelte/**/*.mjs", "node_modules/svelte/**/package.json"]),
+    visibility = ["//visibility:public"]
+)
+
 nodejs_binary(
     name = "rollup_bin",
     data = [
@@ -25,7 +23,8 @@ nodejs_binary(
         "@build_bazel_rules_svelte_deps//@rollup/plugin-node-resolve",
         "@build_bazel_rules_svelte_deps//rollup",
         "@build_bazel_rules_svelte_deps//svelte",
-        "@build_bazel_rules_svelte_deps//uglify-js",
+        "@build_bazel_rules_svelte_deps//terser",
+        "@build_bazel_rules_svelte_deps//google-closure-compiler"
     ],
     entry_point = "@build_bazel_rules_svelte_deps//:node_modules/rollup/dist/bin/rollup",
     # Disable rules_nodejs patch that breaks relative imports of compiled .svelte.js files
@@ -35,11 +34,22 @@ nodejs_binary(
 )
 
 nodejs_binary(
-    name = "uglify",
+    name = "closure_bin",
     data = [
-        "@build_bazel_rules_svelte_deps//uglify-js",
+        "@build_bazel_rules_svelte_deps//google-closure-compiler",
+        "@build_bazel_rules_svelte_deps//svelte",
+        "@build_bazel_rules_svelte_deps//find-up"
     ],
-    entry_point = "@build_bazel_rules_svelte_deps//:node_modules/uglify-js/bin/uglifyjs",
+    entry_point = ":closure.js",
+    visibility = ["//visibility:public"],
+)
+
+nodejs_binary(
+    name = "terser",
+    data = [
+        "@build_bazel_rules_svelte_deps//terser",
+    ],
+    entry_point = "@build_bazel_rules_svelte_deps//:node_modules/terser/bin/terser",
     visibility = ["//visibility:public"],
 )
 

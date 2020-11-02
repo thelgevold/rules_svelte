@@ -2,6 +2,6 @@
   "devDependencies": {
     "@bazel/hide-bazel-files": "^1.7.0",
     "lite-server": "2.5.4",
-    "lodash": "4.17.20"
+    "rxjs": "6.6.3"
   }
 }

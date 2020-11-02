@@ -1,17 +1,17 @@
 "Implementation of bundle_dev rule."
 
-load("//internal:get-files.bzl", "get_files")
+load("//internal:get-files.bzl", "copy_files")
 load("//internal:get-config.bzl", "get_config")
 
 def _bundle_dev(ctx):
-    files = get_files(ctx)
+    files = copy_files(ctx)
 
     config = get_config(ctx)
     files.append(config)
 
     args = ctx.actions.args()
     args.add_all(["--config", config.path])
-    args.add_all(["--input", ctx.bin_dir.path + "/" + ctx.file.entry_point.path])
+    args.add_all(["--input", ctx.bin_dir.path + "/build-output/src/" + ctx.file.entry_point.path])
     args.add_all(["--file", ctx.outputs.build.path])
 
     ctx.actions.run(
@@ -26,6 +26,7 @@ bundle_dev = rule(
     attrs = {
         "deps": attr.label_list(),
         "entry_point": attr.label(allow_single_file = True),
+        "_svelte_deps": attr.label(executable = False, allow_files = True, default = Label("//internal:svelte_deps")),
         "_rollup": attr.label(
             executable = True,
             cfg = "host",

@@ -1,6 +1,6 @@
 workspace(
     name = "tests",
-    managed_directories = {"@test_deps": ["node_modules"]},
+    managed_directories = {"@npm": ["node_modules"]},
 )
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
@@ -28,7 +28,7 @@ load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install
 node_repositories()
 
 yarn_install(
-    name = "test_deps",
+    name = "npm",
     package_json = "@tests//:package.json",
     yarn_lock = "@tests//:yarn.lock",
 )

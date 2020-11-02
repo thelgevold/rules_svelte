@@ -25,11 +25,11 @@ nodejs_binary(
     name = "server",
     data = [
         ":bundle_dev",
-        ":bundle_prod",
+        ":bundle_prod_rollup",
         ":index.html",
-        "@test_deps//lite-server",
+        "@npm//lite-server",
     ],
-    entry_point = "@test_deps//:node_modules/lite-server/bin/lite-server",
+    entry_point = "@npm//:node_modules/lite-server/bin/lite-server",
     visibility = ["//visibility:public"],
 )
 
@@ -38,15 +38,15 @@ bundle_dev(
     entry_point = "main-dev.js",
     deps = [
         ":DevApp",
-        "@test_deps//lodash",
+        "@npm//rxjs",
     ],
 )
 
 bundle_prod(
-    name = "bundle_prod",
+    name = "bundle_prod_rollup",
     entry_point = "main-prod.js",
     deps = [
         ":ProdApp",
-        "@test_deps//lodash",
+        "@npm//rxjs",
     ],
 )
