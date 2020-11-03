@@ -71,3 +71,5 @@ http://www.syntaxsuccess.com/viewarticle/svelte-bazel-build
 http://www.syntaxsuccess.com/viewarticle/svelte-bazel-seed
 
 http://www.syntaxsuccess.com/viewarticle/remote-build-execution-with-bazel-and-svelte
+
+https://www.syntaxsuccess.com/viewarticle/added-closure-compiler-support-to-svelte-prod-bundling-rule
