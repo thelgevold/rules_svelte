@@ -1,6 +1,6 @@
 "Implementation of bundle_prod rule."
 
-load("//internal:get-files.bzl", "copy_files")
+load("//internal:copy-files.bzl", "copy_files")
 load("//internal:get-config.bzl", "get_config")
 
 def _bundle_prod(ctx):
@@ -30,7 +30,6 @@ def _bundle_prod(ctx):
 
         args = ctx.actions.args()
         args.add_all(["--config", config.path])
-        print(ctx.build_file_path)
         args.add_all(["--input", ctx.bin_dir.path + "/" + ctx.build_file_path.replace("BUILD.bazel", "") + "/build-output/src/" + ctx.file.entry_point.path])
         args.add_all(["--file", bundle])
 

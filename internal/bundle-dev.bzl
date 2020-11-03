@@ -1,6 +1,6 @@
 "Implementation of bundle_dev rule."
 
-load("//internal:get-files.bzl", "copy_files")
+load("//internal:copy-files.bzl", "copy_files")
 load("//internal:get-config.bzl", "get_config")
 
 def _bundle_dev(ctx):
