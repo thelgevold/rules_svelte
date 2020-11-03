@@ -11,7 +11,7 @@ def _bundle_dev(ctx):
 
     args = ctx.actions.args()
     args.add_all(["--config", config.path])
-    args.add_all(["--input", ctx.bin_dir.path + "/build-output/src/" + ctx.file.entry_point.path])
+    args.add_all(["--input", ctx.bin_dir.path + "/" + ctx.build_file_path.replace("BUILD.bazel", "") + "/build-output/src/" + ctx.file.entry_point.path])
     args.add_all(["--file", ctx.outputs.build.path])
 
     ctx.actions.run(
