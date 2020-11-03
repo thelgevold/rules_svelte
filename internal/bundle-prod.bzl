@@ -30,7 +30,8 @@ def _bundle_prod(ctx):
 
         args = ctx.actions.args()
         args.add_all(["--config", config.path])
-        args.add_all(["--input", ctx.bin_dir.path + "/build-output/src/" + ctx.file.entry_point.path])
+        print(ctx.build_file_path)
+        args.add_all(["--input", ctx.bin_dir.path + "/" + ctx.build_file_path.replace("BUILD.bazel", "") + "/build-output/src/" + ctx.file.entry_point.path])
         args.add_all(["--file", bundle])
 
         ctx.actions.run(
