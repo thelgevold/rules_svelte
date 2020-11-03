@@ -14,7 +14,6 @@ def copy_files(ctx):
         files.append(f)    
 
     if hasattr(ctx.attr, "closure_config") and not ctx.file.closure_config == None:
-        print(ctx.file.closure_config)
         f = ctx.actions.declare_file("build-output/" + ctx.file.closure_config.path)
         ctx.actions.expand_template(
                 output = f,
