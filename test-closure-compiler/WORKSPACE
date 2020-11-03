@@ -1,5 +1,5 @@
 workspace(
-    name = "tests",
+    name = "tests_closure_compiler",
     managed_directories = {"@npm": ["node_modules"]},
 )
 
@@ -29,8 +29,8 @@ node_repositories()
 
 yarn_install(
     name = "npm",
-    package_json = "@tests//:package.json",
-    yarn_lock = "@tests//:yarn.lock",
+    package_json = "//:package.json",
+    yarn_lock = "//:yarn.lock",
 )
 
 load("@build_bazel_rules_svelte//:defs.bzl", "rules_svelte_dependencies")
