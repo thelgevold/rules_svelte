@@ -9,7 +9,7 @@ def copy_files(ctx):
         ctx.actions.expand_template(
                 output = f,
                 template = svelteFile,
-                substitutions = {},
+                substitutions = {"/internal';": "/internal/index.mjs';"},
             )
         files.append(f)    
 
@@ -18,15 +18,19 @@ def copy_files(ctx):
         ctx.actions.expand_template(
                 output = f,
                 template = ctx.file.closure_config,
-                substitutions = {},
+                substitutions = {
+                    
+                },
         )
         files.append(f)
 
     for dep in ctx.attr.deps:
         if NpmPackageInfo in dep:
             for npm in dep[NpmPackageInfo].sources.to_list():
+                
                 if npm.extension == "js" or npm.basename == "package.json":
-                    npm_parts = npm.path.split("node_modules")
+                    npm_parts = npm.path.split("node_modules", 1)
+                
                     f = ctx.actions.declare_file("build-output/node_modules/" + npm_parts[1])
                     ctx.actions.expand_template(
                         output = f,
