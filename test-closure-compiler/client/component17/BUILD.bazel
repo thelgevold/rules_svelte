@@ -1,0 +1,8 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@build_bazel_rules_svelte//:defs.bzl", "bundle_prod", "svelte")
+
+svelte(
+    name = "Component17",
+    entry_point = "Component17.svelte",
+)

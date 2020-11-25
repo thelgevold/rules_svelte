@@ -54,10 +54,11 @@ nodejs_binary(
 )
 
 nodejs_binary(
-    name = "svelte",
+    name = "svelte_bin",
     data = [
         ":svelte.js",
         "@build_bazel_rules_svelte_deps//svelte",
+        "@build_bazel_rules_svelte_deps//@bazel/worker",
     ],
     entry_point = ":svelte.js",
     visibility = ["//visibility:public"],
