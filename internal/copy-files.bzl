@@ -28,7 +28,7 @@ def copy_files(ctx):
         if NpmPackageInfo in dep:
             for npm in dep[NpmPackageInfo].sources.to_list():
                 
-                if npm.extension == "js" or npm.basename == "package.json":
+                if npm.extension == "mjs" or npm.extension == "js" or npm.basename == "package.json":
                     npm_parts = npm.path.split("node_modules", 1)
                 
                     f = ctx.actions.declare_file("build-output/node_modules/" + npm_parts[1])
