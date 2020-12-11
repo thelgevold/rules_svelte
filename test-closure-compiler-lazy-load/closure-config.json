@@ -1,0 +1,24 @@
+{
+  "chunks": [
+    "common:9",
+    "route1:2:common",
+    "route2:2:common"
+  ],
+  "dependency-ordered-js": [
+    "main.js",
+    "App.svelte.js",
+    "utils/mount-util.js",
+    "node_modules/svelte/internal/package.json",
+    "node_modules/svelte/internal/index.mjs",
+    "node_modules/page/package.json",
+    "node_modules/page/page.mjs",
+    "node_modules/svelte/package.json",
+    "node_modules/svelte/index.mjs",
+
+    "route1/Route1.svelte.js",
+    "route1/main.js",
+    
+    "route2/Route2.svelte.js",
+    "route2/main.js"
+  ]
+}

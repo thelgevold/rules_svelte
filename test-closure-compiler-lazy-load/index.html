@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+	<style>
+		.active{
+			color: white;
+			background: black;
+		}
+	</style>
+	<script>
+		async function navigate(module) {
+			if(module !== 'route1' && module !== 'route2') {
+				throw new Error('Unsupported route');
+			}
+			await import(`/bundles/${module}.js`);
+			window[module]();
+		}
+	</script>	
+	<title>Svelte app</title>
+
+	<script defer src='/bundles/common.js'></script>
+</head>
+
+<body>
+	<div id='target'><div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@build_bazel_rules_svelte//:defs.bzl", "bundle_prod", "svelte")
+
+package(default_visibility = ["//visibility:public"])
+
+svelte(
+    name = "App",
+    srcs = ["main.js"],
+    entry_point = "App.svelte",
+    deps = [
+       "//route1:Route1",
+       "//route2:Route2"
+    ]
+)
+
+bundle_prod(
+    name = "bundle",
+    entry_point = "main.js",    
+    closure_config = ":closure-config.json",
+    deps = [
+        ":App",
+        "@npm//page",
+    ],
+)
+
+nodejs_binary(
+    name = "server",
+    data = [
+        "index.html",
+        ":bundle",
+        "@npm//lite-server",
+        "@npm//page",
+    ],
+    entry_point = "@npm//:node_modules/lite-server/bin/lite-server"
+)

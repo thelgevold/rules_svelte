@@ -9,7 +9,7 @@ def copy_files(ctx):
         ctx.actions.expand_template(
                 output = f,
                 template = svelteFile,
-                substitutions = {"/internal';": "/internal/index.mjs';"},
+                substitutions = {},
             )
         files.append(f)    
 
@@ -18,9 +18,7 @@ def copy_files(ctx):
         ctx.actions.expand_template(
                 output = f,
                 template = ctx.file.closure_config,
-                substitutions = {
-                    
-                },
+                substitutions = {},
         )
         files.append(f)
 

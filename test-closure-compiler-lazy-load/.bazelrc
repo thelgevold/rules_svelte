@@ -1,0 +1,2 @@
+build --strategy=SvelteCompile=worker
+build --symlink_prefix=dist/
