@@ -44,7 +44,7 @@ if(config.entry_point) {
 }
 
 if(config.chunks) {
-  let js = config['dependency-ordered-js'].map(m => {
+  let js = config.js.map(m => {
     if(m.indexOf('node_modules') === -1) {
       return `${root}/src/${m}`;
     }

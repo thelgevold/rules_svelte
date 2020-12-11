@@ -4,7 +4,7 @@
     "route1:2:common",
     "route2:2:common"
   ],
-  "dependency-ordered-js": [
+  "js": [
     "main.js",
     "App.svelte.js",
     "utils/mount-util.js",
