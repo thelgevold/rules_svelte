@@ -14,44 +14,44 @@
 	import Component10 from './component10/Component10.svelte';
 	import Component11 from './component11/Component11.svelte';
 	import Component12 from './component12/Component12.svelte';
-	import Component13 from './component12/Component13.svelte';
-	import Component14 from './component12/Component14.svelte';
-	import Component15 from './component12/Component15.svelte';
-	import Component16 from './component12/Component16.svelte';
-	import Component17 from './component12/Component17.svelte';
-	import Component18 from './component12/Component18.svelte';
-	import Component19 from './component12/Component19.svelte';
-	import Component20 from './component12/Component20.svelte';
-	import Component21 from './component12/Component21.svelte';
-	import Component22 from './component12/Component22.svelte';
-	import Component23 from './component12/Component23.svelte';
-	import Component24 from './component12/Component24.svelte';
-	import Component25 from './component12/Component25.svelte';
-	import Component26 from './component12/Component26.svelte';
-	import Component27 from './component12/Component27.svelte';
-	import Component28 from './component12/Component28.svelte';
-	import Component29 from './component12/Component29.svelte';
-	import Component30 from './component12/Component30.svelte';
-	import Component31 from './component12/Component31.svelte';
-	import Component32 from './component12/Component32.svelte';
-	import Component33 from './component12/Component33.svelte';
-	import Component34 from './component12/Component34.svelte';
-	import Component35 from './component12/Component35.svelte';
-	import Component36 from './component12/Component36.svelte';
-	import Component37 from './component12/Component37.svelte';
-	import Component38 from './component12/Component38.svelte';
-	import Component39 from './component12/Component39.svelte';
-	import Component40 from './component12/Component40.svelte';
-	import Component41 from './component12/Component41.svelte';
-	import Component42 from './component12/Component42.svelte';
-	import Component43 from './component12/Component43.svelte';
-	import Component44 from './component12/Component44.svelte';
-	import Component45 from './component12/Component45.svelte';
-	import Component46 from './component12/Component46.svelte';
-	import Component47 from './component12/Component47.svelte';
-	import Component48 from './component12/Component48.svelte';
-	import Component49 from './component12/Component49.svelte';
-	import Component50 from './component12/Component50.svelte';
+	import Component13 from './component13/Component13.svelte';
+	import Component14 from './component14/Component14.svelte';
+	import Component15 from './component15/Component15.svelte';
+	import Component16 from './component16/Component16.svelte';
+	import Component17 from './component17/Component17.svelte';
+	import Component18 from './component18/Component18.svelte';
+	import Component19 from './component19/Component19.svelte';
+	import Component20 from './component20/Component20.svelte';
+	import Component21 from './component21/Component21.svelte';
+	import Component22 from './component22/Component22.svelte';
+	import Component23 from './component23/Component23.svelte';
+	import Component24 from './component24/Component24.svelte';
+	import Component25 from './component25/Component25.svelte';
+	import Component26 from './component26/Component26.svelte';
+	import Component27 from './component27/Component27.svelte';
+	import Component28 from './component28/Component28.svelte';
+	import Component29 from './component29/Component29.svelte';
+	import Component30 from './component30/Component30.svelte';
+	import Component31 from './component31/Component31.svelte';
+	import Component32 from './component32/Component32.svelte';
+	import Component33 from './component33/Component33.svelte';
+	import Component34 from './component34/Component34.svelte';
+	import Component35 from './component35/Component35.svelte';
+	import Component36 from './component36/Component36.svelte';
+	import Component37 from './component37/Component37.svelte';
+	import Component38 from './component38/Component38.svelte';
+	import Component39 from './component39/Component39.svelte';
+	import Component40 from './component40/Component40.svelte';
+	import Component41 from './component41/Component41.svelte';
+	import Component42 from './component42/Component42.svelte';
+	import Component43 from './component43/Component43.svelte';
+	import Component44 from './component44/Component44.svelte';
+	import Component45 from './component45/Component45.svelte';
+	import Component46 from './component46/Component46.svelte';
+	import Component47 from './component47/Component47.svelte';
+	import Component48 from './component48/Component48.svelte';
+	import Component49 from './component49/Component49.svelte';
+	import Component50 from './component50/Component50.svelte';
 
 	let current = 0;
 
@@ -67,18 +67,18 @@
 <h4>RxJs Interval</h4>
 {current}
 
-<Component1></Component1>
-<Component2></Component2>
-<Component3></Component3>
-<Component4></Component4>
-<Component5></Component5>
-<Component6></Component6>
-<Component7></Component7>
-<Component8></Component8>
-<Component9></Component9>
-<Component10></Component10>
-<Component11></Component11>
-<Component12></Component12>
+<Component1 />
+<Component2 />
+<Component3 />
+<Component4 />
+<Component5 />
+<Component6 />
+<Component7 />
+<Component8 />
+<Component9 />
+<Component10 />
+<Component11 />
+<Component12 />
 <Component13 />
 <Component14 />
 <Component15 />
