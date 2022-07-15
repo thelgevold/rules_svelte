@@ -3,7 +3,7 @@
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-node-resolve": "9.0.0",
     "rollup": "2.26.5",
-    "svelte": "3.31.0",
+    "svelte": "3.49.0",
     "terser": "5.3.8",
     "google-closure-compiler": "20201102.0.1",
     "fs-extra": "9.0.1",
